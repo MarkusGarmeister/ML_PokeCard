@@ -1,0 +1,7 @@
+Data Exploration
+
+1. https://www.kaggle.com/datasets/ellimaaac/pokemon-tcg-all-image-cards/data  - kaggle dataset (.jpg) more than 20.000 images but couldnt find labels 
+2. https://www.kaggle.com/datasets/priyamchoksi/pokemon-cards - kaggle dataset, csv with image url, has some labels,, caption labels has the rarity of the card but also other properties (needs to be cleaned )
+3. https://huggingface.co/datasets/TheFusion21/PokemonCards - hugginface, csv file looks the same as 2. dataset
+4. https://huggingface.co/datasets/tooni/pokemoncards - hugginface, csv file has the rarity of the card in a seperate column (this looks very good so far)
+5. https://tcgdex.dev/ - API, can fetch the image s url and has also the rarity in the object 

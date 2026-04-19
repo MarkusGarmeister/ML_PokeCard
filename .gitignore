@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# uv / virtual environment
+.venv/
+
+# macOS
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Scratch / playground notebooks (not communication artifacts)
+notebooks/manual_model_selection.ipynb
+
+# Project data — never commit raw or prepared data
+data/dataset/
+
+# Trained model snapshots — can be large; store separately
+models/snapshots/
+
+# Experiment records — pickle files can be large
+evaluation/experiment_records/
+
+# Pytest & coverage
+.pytest_cache/
+coverage/
+.coverage
+
+# IDE
+.vscode/
+.idea/
+
+# Claude
+.claude/
+
