@@ -2,6 +2,8 @@ from datasets import load_dataset
 import pandas as pd
 import requests
 import os
+from PIL import Image
+from io import BytesIO
 
 
 class Dataset:
@@ -21,6 +23,18 @@ class Dataset:
         else:
             df = pd.read_csv(self.DATASET_PATH + "cards.csv")
             return df
+
+    def download_image(self, url):
+        try:
+            img_url = url.strip('"')
+            response = requests.get(img_url, timeout=10)
+            response.raise_for_status()
+            img = Image.open(BytesIO(response.content))
+            img = img.convert("RGB")
+            return img
+        except Exception:
+            print(f"Failed to download image from {img_url}")
+            return None
 
     def download_images(self, df: pd.DataFrame):
         for index, row in df.iterrows():
