@@ -1,6 +1,7 @@
 from datasets import load_dataset
 import pandas as pd
 import requests
+import os
 
 
 class Dataset:
@@ -14,7 +15,7 @@ class Dataset:
         return df
 
     def get_dataset(self) -> pd.DataFrame:
-        if self.DATASET_PATH + "cards.csv" is None:
+        if not os.path.exists(self.DATASET_PATH + "cards.csv"):
             df = self.dowload_dataset()
             return df
         else:
