@@ -1,0 +1,42 @@
+RARITY_CLASSES = {
+    # Common
+    "Common": "Common",
+    # Uncommon
+    "Uncommon": "Uncommon",
+    # Rare
+    "Rare": "Rare",
+    "Rare Holo": "Rare",
+    "Promo": "Rare",
+    # Ultra Rare
+    "Rare Ultra": "Ultra Rare",
+    "Ultra Rare": "Ultra Rare",
+    "Rare Holo EX": "Ultra Rare",
+    "Rare Holo V": "Ultra Rare",
+    "Rare Holo GX": "Ultra Rare",
+    "Rare Holo VMAX": "Ultra Rare",
+    "Rare Holo VSTAR": "Ultra Rare",
+    "Rare BREAK": "Ultra Rare",
+    "Rare Prime": "Ultra Rare",
+    "Rare ACE": "Ultra Rare",
+    "ACE SPEC Rare": "Ultra Rare",
+    "Double Rare": "Ultra Rare",
+    "Illustration Rare": "Ultra Rare",
+    "Radiant Rare": "Ultra Rare",
+    "Amazing Rare": "Ultra Rare",
+    # Secret Rare
+    "Rare Secret": "Secret Rare",
+    "Rare Rainbow": "Secret Rare",
+    "Special Illustration Rare": "Secret Rare",
+    "Rare Shiny": "Secret Rare",
+    "Shiny Rare": "Secret Rare",
+    "Rare Shiny GX": "Secret Rare",
+    "Shiny Ultra Rare": "Secret Rare",
+    "Hyper Rare": "Secret Rare",
+    "Rare Holo Star": "Secret Rare",
+    "Classic Collection": "Secret Rare",
+    "LEGEND": "Secret Rare",
+    "Rare Shining": "Secret Rare",
+    "Trainer Gallery Rare Holo": "Secret Rare",
+    "Rare Prism Star": "Secret Rare",
+    "Rare Holo LV.X": "Secret Rare",
+}
