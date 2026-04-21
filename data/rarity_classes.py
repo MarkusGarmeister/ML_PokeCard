@@ -1,4 +1,4 @@
-RARITY_CLASSES = {
+RARITY_MAPPING = {
     # Common
     "Common": "Common",
     # Uncommon
@@ -40,3 +40,5 @@ RARITY_CLASSES = {
     "Rare Prism Star": "Secret Rare",
     "Rare Holo LV.X": "Secret Rare",
 }
+
+RARITY_CLASSES = ["Common", "Uncommon", "Rare", "Ultra Rare", "Secret Rare"]

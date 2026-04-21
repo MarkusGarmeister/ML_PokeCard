@@ -4,6 +4,9 @@ import requests
 import os
 from PIL import Image
 from io import BytesIO
+from data.rarity_classes import RARITY_CLASSES, RARITY_MAPPING
+
+IMAGE_SIZE = (120, 168)  # width x height
 
 
 class Dataset:
@@ -52,6 +55,14 @@ class Dataset:
 
             except requests.exceptions.RequestException as e:
                 print(f"Failed to download {image_name}: {e}")
+
+    def map_rarity(self, rarity):
+        return RARITY_MAPPING.get(rarity, None)
+
+    def get_mapped_dataset(self) -> pd.DataFrame:
+        df = self.get_dataset()
+        df["mapped_rarity"] = df["rarity"].apply(self.map_rarity)
+        return df
 
 
 if __name__ == "__main__":
