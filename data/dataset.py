@@ -5,14 +5,16 @@ import os
 from PIL import Image
 from io import BytesIO
 from data.rarity_classes import RARITY_CLASSES, RARITY_MAPPING
+import numpy as np
 
 IMAGE_SIZE = (120, 168)  # width x height
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 class Dataset:
     def __init__(self):
-        self.DATASET_PATH = "data/dataset/"
-        self.IMAGE_PATH = "data/dataset/img/"
+        self.DATASET_PATH = os.path.join(BASE_DIR, "data", "dataset") + "/"
+        self.IMAGE_PATH = os.path.join(BASE_DIR, "data", "dataset", "img") + "/"
 
     def dowload_dataset(self) -> pd.DataFrame:
         ds = load_dataset("tooni/pokemoncards", data_files="cards.csv", split="train")
@@ -40,6 +42,10 @@ class Dataset:
             return None
 
     def download_images(self, df: pd.DataFrame):
+        x_images = []
+        y_labels = []
+        failed = 0
+
         for index, row in df.iterrows():
             image_url = row["small_image_source"]
             image_url = image_url.strip('"')
@@ -49,12 +55,19 @@ class Dataset:
             try:
                 response = requests.get(image_url)
                 response.raise_for_status()
-                with open(image_path, "wb") as f:
-                    f.write(response.content)
-                print(f"Downloaded {image_name}")
+                img = Image.open(BytesIO(response.content))
+                img = img.convert("RGB")
+                img.save(image_path)
+
+                img_resized = img.resize(IMAGE_SIZE)
+                x_images.append(np.array(img_resized))
+                y_labels.append(row["mapped_rarity"])
 
             except requests.exceptions.RequestException as e:
                 print(f"Failed to download {image_name}: {e}")
+                failed += 1
+
+        return x_images, y_labels, failed
 
     def map_rarity(self, rarity):
         return RARITY_MAPPING.get(rarity, None)
