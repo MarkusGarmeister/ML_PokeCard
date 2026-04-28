@@ -81,6 +81,11 @@ class Dataset:
         np.save(self.DATASET_PATH + "x_images.npy", x)
         np.save(self.DATASET_PATH + "y_labels.npy", y)
 
+    def get_prep_data(self):
+        x = np.load(self.DATASET_PATH + "x_images.npy")
+        y = np.load(self.DATASET_PATH + "y_labels.npy")
+        return x, y
+
 
 if __name__ == "__main__":
     dataset = Dataset()
