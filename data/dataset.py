@@ -77,6 +77,10 @@ class Dataset:
         df["mapped_rarity"] = df["rarity"].apply(self.map_rarity)
         return df
 
+    def store_prep_data(self, x: np.ndarray, y: np.ndarray):
+        np.save(self.DATASET_PATH + "x_images.npy", x)
+        np.save(self.DATASET_PATH + "y_labels.npy", y)
+
 
 if __name__ == "__main__":
     dataset = Dataset()
