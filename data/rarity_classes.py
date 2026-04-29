@@ -6,7 +6,6 @@ RARITY_MAPPING = {
     # Rare
     "Rare": "Rare",
     "Rare Holo": "Rare",
-    "Promo": "Rare",
     # Ultra Rare
     "Rare Ultra": "Ultra Rare",
     "Ultra Rare": "Ultra Rare",
