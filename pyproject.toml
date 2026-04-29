@@ -10,4 +10,5 @@ dependencies = [
     "matplotlib>=3.10.8",
     "pandas>=2.3.3",
     "scikit-learn>=1.7.2",
+    "tensorflow>=2.21.0",
 ]
