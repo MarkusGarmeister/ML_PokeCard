@@ -6,6 +6,7 @@ from PIL import Image
 from io import BytesIO
 from data.rarity_classes import RARITY_CLASSES, RARITY_MAPPING
 import numpy as np
+from sklearn.model_selection import train_test_split
 
 IMAGE_SIZE = (120, 168)  # width x height
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -85,6 +86,39 @@ class Dataset:
         x = np.load(self.DATASET_PATH + "x_images.npy")
         y = np.load(self.DATASET_PATH + "y_labels.npy")
         return x, y
+
+    def get_train_val_test_split(
+        self,
+        val_size: float = 0.15,
+        test_size: float = 0.15,
+        random_state: int = 42,
+        normalize: bool = True,
+    ):
+        x, y = self.get_prep_data()
+        if normalize:
+            x = x.astype("float32") / 255.0
+
+        y_classes = np.argmax(y, axis=1)
+
+        x_trainval, x_test, y_trainval, y_test = train_test_split(
+            x,
+            y,
+            test_size=test_size,
+            random_state=random_state,
+            stratify=y_classes,
+        )
+
+        relative_val_size = val_size / (1.0 - test_size)
+        y_trainval_classes = np.argmax(y_trainval, axis=1)
+        x_train, x_val, y_train, y_val = train_test_split(
+            x_trainval,
+            y_trainval,
+            test_size=relative_val_size,
+            random_state=random_state,
+            stratify=y_trainval_classes,
+        )
+
+        return x_train, x_val, x_test, y_train, y_val, y_test
 
 
 if __name__ == "__main__":
