@@ -6,7 +6,12 @@ from keras.layers import (
     Dropout,
     BatchNormalization,
     Flatten,
+    GlobalAveragePooling2D,
     Input,
+    RandomFlip,
+    RandomRotation,
+    RandomZoom,
+    RandomBrightness,
 )
 from keras.constraints import UnitNorm
 
@@ -26,10 +31,18 @@ class CNNBuilder:
         self.apply_dropout = False
         self.apply_batch_normalization = False
         self.weight_constraints = False
+        self.apply_augmentation = False
+        self.use_global_pooling = False
 
     def build_model(self):
         model = Sequential()
         model.add(Input(shape=self.in_shape))
+
+        if self.apply_augmentation:
+            model.add(RandomFlip("horizontal"))
+            model.add(RandomRotation(0.05))
+            model.add(RandomZoom(0.1))
+            model.add(RandomBrightness(0.1))
 
         for index in range(len(self.convolutional_layers)):
             self.add_convolutional_layer(
@@ -37,7 +50,10 @@ class CNNBuilder:
                 filters=self.convolutional_layers[index],
             )
 
-        model.add(Flatten())
+        if self.use_global_pooling:
+            model.add(GlobalAveragePooling2D())
+        else:
+            model.add(Flatten())
 
         for index in range(len(self.fully_connected_layers)):
             self.add_fully_connected_layer(
